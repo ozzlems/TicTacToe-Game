@@ -10,6 +10,7 @@ public class tictactoe  implements ActionListener {
  JPanel buttonpanel = new JPanel();
  JButton btn[] = new JButton[9];
  JLabel lb = new JLabel();
+ int add = 0;
  boolean player;
  Random rand = new Random();
 
@@ -34,7 +35,7 @@ public class tictactoe  implements ActionListener {
        buttonpanel.setLayout(new GridLayout(3,3,2,4));
        buttonpanel.setBackground(new Color(55,55,55));
        firstTurn();
-       check();
+
 
        for(int i = 0 ; i<9 ; i++){
            btn[i] = new JButton();
@@ -128,19 +129,44 @@ public class tictactoe  implements ActionListener {
             OWins(2,4,6);
 
         }
+        else if(add == 9 ){
+            lb.setText("TIE ");
 
 
+        }
 
-    }
-   public void XWins(int a , int b , int c){
+   }
+   public boolean XWins(int a , int b , int c){
+
+       btn[a].setBackground(Color.CYAN);
+       btn[b].setBackground(Color.CYAN);
+       btn[c].setBackground(Color.CYAN);
+
+       for(int i = 0 ; i< 9 ; i++){
+           lb.setEnabled(false);
+       }
+
+       lb.setText("X wins !");
+       return true;
+
+
 
    }
 
 
 
-   public void OWins(int a , int b , int c){
+   public boolean OWins(int a , int b , int c){
+       btn[a].setBackground(Color.CYAN);
+       btn[b].setBackground(Color.CYAN);
+       btn[c].setBackground(Color.CYAN);
 
+       for(int i = 0 ; i< 9 ; i++){
+           lb.setEnabled(false);
+       }
+       lb.setText("O wins !");
+       return true;
    }
+
 
 
 
@@ -153,21 +179,27 @@ public class tictactoe  implements ActionListener {
                         btn[i].setText("X");
                         player = false;
                         lb.setText("O Turn !");
+                        add++;
+
                         check();
                     }
+
+
                 }
-             else {
-                 if (btn[i].getText() == "") {
-                        btn[i].setForeground(new Color(51, 153, 255));
+             else if(btn[i].getText() == "") {
+                 btn[i].setForeground(new Color(51, 153, 255));
                         btn[i].setText("O");
                         player = true;
                         lb.setText("X Turn !");
+                        add++;
                         check();
 
                     }
                 }
 
-            } }}
+
+
+            } }
 
 
             public static void main (String[]args){
